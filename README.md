@@ -1,16 +1,120 @@
-# mst_test_app
+# Subscription App
 
-A new Flutter project.
+Flutter приложение для управления подписками. Разработано как демонстрационное решение полного цикла работы с подписками: от онбординга, выбора тарифа до управления активной подпиской.
 
-## Getting Started
+Автор: AnathanWang
 
-This project is a starting point for a Flutter application.
+## Основные функции
 
-A few resources to get you started if this is your first Flutter project:
+**Онбординг (2 экрана)**
+- Два экрана приветствия с информацией о приложении
+- Пошаговая навигация с кнопкой "Продолжить"
+- Сохранение статуса завершения онбординга
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+**Экран выбора подписки (Paywall)**
+- Месячная подписка: 299 рублей
+- Годовая подписка: 2490 рублей со скидкой 20%
+- Интерактивные карточки с выделением выбранного тарифа
+- Эмуляция процесса покупки
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**Главный экран**
+- Информация о типе подписки
+- Дата активации и дата следующего платежа
+- Периодичность платежей
+- Расчет дней до платежа с правильным склонением
+- Список преимуществ подписки
+- Кнопка выхода для сброса подписки
+
+## Структура проекта
+
+```
+lib/
+├── main.dart                      - точка входа, управление состоянием
+├── constants/colors.dart          - цвета приложения
+├── models/subscription.dart       - модель подписки
+├── screens/
+│   ├── onboarding_screen.dart    - онбординг
+│   ├── paywall_screen.dart       - выбор подписки
+│   └── home_screen.dart          - главный экран
+├── services/subscription_service.dart - работа с хранилищем
+└── widgets/subscription_card.dart     - карточка подписки
+```
+
+## Технические детали
+
+**Как работает:**
+1. Приложение инициализирует SharedPreferences при запуске
+2. Проверяет статус онбординга и наличие подписки
+3. Показывает нужный экран в зависимости от состояния
+4. Все данные сохраняются локально
+
+**Состояния приложения:**
+- onboarding - если первый запуск
+- paywall - если онбординг завершен, но подписки нет
+- home - если подписка активна
+
+**Хранение данных:**
+- SharedPreferences для сохранения подписки и статуса онбординга
+- JSON сериализация для структурирования данных
+
+## Быстрый старт
+
+```bash
+git clone https://github.com/AnathanWang/mst-subscription-app.git
+cd mst-subscription-app
+flutter pub get
+flutter run
+```
+
+## Зависимости
+
+- Flutter 3.10.4+
+- shared_preferences 2.2.2
+
+## Что можно было бы добавить со временем
+
+**Backend и платежи:**
+- REST API для синхронизации данных
+- Интеграция Apple In-App Purchase и Google Play Billing
+- Реальная обработка платежей через Stripe или Яндекс.Касса
+- История платежей на сервере
+
+**Функциональность:**
+- Аутентификация пользователей через Firebase
+- Push уведомления (напоминание о платеже, подтверждение платежа)
+- Возможность смены тарифа без отписки
+- История транзакций
+- Система реферралов и промокодов
+- Чат поддержки
+
+**Технология:**
+- Миграция на Provider или BLoC для управления состоянием
+- Темный режим
+- Локализация на другие языки
+- Unit и integration тесты
+- Firebase Analytics для отслеживания событий
+- Обработка ошибок и логирование через Sentry
+
+**Оптимизация:**
+- Оптимизация производительности приложения
+- Профилирование и снижение потребления памяти
+- Кэширование сетевых запросов
+- Настройка CI/CD через GitHub Actions
+
+**UI/UX:**
+- Адаптация под планшеты и другие размеры экранов
+- Более сложные анимации
+- Иконки и иллюстрации высокого качества
+- Паттерны загрузки (skeleton screens)
+
+## Документация
+
+- QUICK_START.md - быстрый старт
+- SETUP_GUIDE.md - инструкция по установке
+- USAGE_EXAMPLES.md - примеры использования
+- ARCHITECTURE.md - описание архитектуры
+- APP_DESCRIPTION.md - подробное описание функций
+
+## Контакты
+
+GitHub: @AnathanWang
